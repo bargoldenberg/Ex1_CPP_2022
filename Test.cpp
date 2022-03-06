@@ -87,7 +87,7 @@ TEST_CASE("Bad input") {
     CHECK_THROWS(mat(12, 3, '$', '$'));
 	/*test 4*/
 	CHECK_THROWS(mat(15, 4, '@', '@'));
-	/*ONE OR TWO OF THE ARGUMENTS ARE ODD*/
+	/*ONE OR TWO OF THE ARGUMENTS ARE NEGATIVE*/
 	/*------------------------------------*/
 	/*test 5*/
     CHECK_THROWS(mat(-10, 5, '(', ')'));
