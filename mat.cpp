@@ -1,6 +1,7 @@
 #include<string.h>
 #include<iostream>
 #include"mat.hpp"
+/* AUTHOR: BAR GOLDENBERG 209894286 */
 using namespace std;
 /**
  * @brief This function loops a 2d array and fills it with a character.
@@ -24,6 +25,16 @@ void ariel::loop(char **arr,int l, int w,int minwidth,int minlength,char c){
     }
   
 }
+/**
+ * @brief this function uses the loop function to create a carpet type string.
+ * question from: https://codegolf.stackexchange.com/questions/241219/mat-printing-matrix
+ * 
+ * @param w 
+ * @param l 
+ * @param c 
+ * @param spacing 
+ * @return string 
+ */
 string ariel::mat(int w,int l,char c,char spacing){
     string ans = "";
     if(l<=0||w<=0||l%2==0 ||w%2==0){
