@@ -37,8 +37,10 @@ void ariel::loop(char **arr,int l, int w,int minwidth,int minlength,char c){
  */
 string ariel::mat(int w,int l,char c,char spacing){
     string ans = "";
-    if(l<=0||w<=0||l%2==0 ||w%2==0){
-        throw invalid_argument("length or width arguments are invalid");
+    if(l%2==0 ||w%2==0){
+        throw invalid_argument("Mat size is always odd");
+    }else if(l<0||w<0){
+        throw invalid_argument("Mat size is always positive");
     }
     char** arr;
     arr = new char* [l];
