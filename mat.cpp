@@ -16,14 +16,14 @@ using namespace std;
 /*
 Draws a rectangle in a matrix given a set of bounds and a character.
 */
-void ariel::loop(char **arr,int l, int w,int minwidth,int minlength,char c){
-    for(int i=minwidth;i<w;i++){
+void ariel::loop(char **arr,int originalwidth, int originallength,int minwidth,int minlength,char c){
+    for(int i=minwidth;i<originallength;i++){
         arr[minlength][i]=c;
-        arr[l-1][i]=c;
+        arr[originalwidth-1][i]=c;
     }
-    for(int i=minlength;i<l;i++){
+    for(int i=minlength;i<originalwidth;i++){
         arr[i][minwidth]=c;
-        arr[i][w-1]=c;
+        arr[i][originallength-1]=c;
     }
   
 }
@@ -38,7 +38,7 @@ void ariel::loop(char **arr,int l, int w,int minwidth,int minlength,char c){
  * @return string 
  */
 string ariel::mat(int w,int l,char c,char spacing){
-    string ans = "";
+    string ans;
     /*
     Throw Exceptions if input is illegal.
     */
