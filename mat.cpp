@@ -13,7 +13,9 @@ using namespace std;
  * @param minlength 
  * @param c 
  */
-
+/*
+Draws a rectangle in a matrix given a set of bounds and a character.
+*/
 void ariel::loop(char **arr,int l, int w,int minwidth,int minlength,char c){
     for(int i=minwidth;i<w;i++){
         arr[minlength][i]=c;
@@ -37,7 +39,10 @@ void ariel::loop(char **arr,int l, int w,int minwidth,int minlength,char c){
  */
 string ariel::mat(int w,int l,char c,char spacing){
     string ans = "";
-    if(l%2==0 ||w%2==0){
+    /*
+    Throw Exceptions if input is illegal.
+    */
+    if(l%2==0||w%2==0){
         throw invalid_argument("Mat size is always odd");
     }else if(l<0||w<0){
         throw invalid_argument("Mat size is always positive");
@@ -50,6 +55,9 @@ string ariel::mat(int w,int l,char c,char spacing){
     int newwidth=w;
     int newlength=l;
     int k=0;
+    /*
+    Create carpets by using loop to draw smaller and smaller rectangles, untill we receive the desiered carpet.
+    */
     while(k<=w/2&&k<=l/2){
         if(k%2==0){
             ariel::loop(arr,newlength,newwidth,k,k,c);
@@ -66,6 +74,16 @@ string ariel::mat(int w,int l,char c,char spacing){
         }
         ans+="\n";
     }
+    /*
+    Free alocated memory.
+    */
+    for(int i=0;i<l;i++){
+        delete[] arr[i];
+    }
+    delete[] arr;
+    /*
+    return answer.
+    */
     return ans;
     
 }
