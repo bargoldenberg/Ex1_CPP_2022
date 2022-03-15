@@ -1,6 +1,7 @@
 #include<string.h>
 #include<iostream>
 #include"mat.hpp"
+#include<vector>
 /* AUTHOR: BAR GOLDENBERG 209894286 */
 using namespace std;
 /**
@@ -16,7 +17,7 @@ using namespace std;
 /*
 Draws a rectangle in a matrix given a set of bounds and a character.
 */
-void ariel::loop(char **arr,int originalwidth, int originallength,int minwidth,int minlength,char c){
+vector<vector<char>> ariel::loop(vector<vector<char>> arr,int originalwidth, int originallength,int minwidth,int minlength,char c){
     for(int i=minwidth;i<originallength;i++){
         arr[minlength][i]=c;
         arr[originalwidth-1][i]=c;
@@ -25,7 +26,7 @@ void ariel::loop(char **arr,int originalwidth, int originallength,int minwidth,i
         arr[i][minwidth]=c;
         arr[i][originallength-1]=c;
     }
-  
+  return arr;
 }
 /**
  * @brief this function uses the loop function to create a carpet type string.
@@ -46,12 +47,21 @@ string ariel::mat(int w,int l,char c,char spacing){
         throw invalid_argument("Mat size is always odd");
     }else if(l<0||w<0){
         throw invalid_argument("Mat size is always positive");
+    }else if(c<33||spacing<33||c>126||spacing>126){
+        throw invalid_argument("illegal char");
     }
-    char** arr;
-    arr = new char* [l];
+    // char** arr;
+    // arr = new char* [l];
+    // for(int i=0;i<l;i++){
+    //     arr[i] = new char[w];
+    // }
+    vector<vector<char>> arr;
+    arr.resize(l);
     for(int i=0;i<l;i++){
-        arr[i] = new char[w];
+        arr[i].resize(w);
     }
+
+
     int newwidth=w;
     int newlength=l;
     int k=0;
@@ -60,9 +70,9 @@ string ariel::mat(int w,int l,char c,char spacing){
     */
     while(k<=w/2&&k<=l/2){
         if(k%2==0){
-            ariel::loop(arr,newlength,newwidth,k,k,c);
+            arr = ariel::loop(arr,newlength,newwidth,k,k,c);
         }else{
-            ariel::loop(arr,newlength,newwidth,k,k,spacing);
+            arr = ariel::loop(arr,newlength,newwidth,k,k,spacing);
         }
         newwidth--;
         newlength--;
@@ -77,10 +87,10 @@ string ariel::mat(int w,int l,char c,char spacing){
     /*
     Free alocated memory.
     */
-    for(int i=0;i<l;i++){
-        delete[] arr[i];
-    }
-    delete[] arr;
+    // for(int i=0;i<l;i++){
+    //     delete[] arr[i];
+    // }
+    // delete[] arr;
     /*
     return answer.
     */
